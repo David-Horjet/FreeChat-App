@@ -15,7 +15,7 @@
       ]
     ],
     "splash": {
-      "image": "./assets/fav.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

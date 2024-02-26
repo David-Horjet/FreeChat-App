@@ -1,19 +1,18 @@
-import React from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { FontAwesome, Ionicons } from '@expo/vector-icons';
-
-import ChatScreen from './ChatScreen'; // Import your screen components
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { FontAwesome, Ionicons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavigator = () => {
+  const ChatScreen = require("../../../screens/auth/chat/ChatScreen").default;
   return (
     <Tab.Navigator
-      tabBarOptions={{
-        activeTintColor: '#3498db',
-        inactiveTintColor: 'gray',
+      screenOptions={{
+        activeTintColor: "#3498db",
+        inactiveTintColor: "gray",
         style: {
-          backgroundColor: '#2c3e50',
+          backgroundColor: "#2c3e50",
           borderTopWidth: 0, // Remove top border on Android
           elevation: 0, // Remove elevation on Android
         },

@@ -11,8 +11,12 @@ import styled from "styled-components/native";
 import axios from "axios";
 import { io } from "socket.io-client";
 import { host, userRoute, usersRoute } from "../../../utils/apiRoutes";
-import { Container, Header, HeaderText } from "../../../components/styles/styled";
-import { AntDesign } from '@expo/vector-icons';
+import {
+  Container,
+  Header,
+  HeaderText,
+} from "../../../components/styles/styled";
+import { AntDesign } from "@expo/vector-icons";
 import BottomTabNavigator from "../../../components/shared/bottomTabNavigator/BottomTabNavigator";
 
 const ChatScreen = () => {
@@ -85,7 +89,7 @@ const ChatScreen = () => {
           // renderItem={renderContact}
         //   keyExtractor={(item) => item.id.toString()}
         /> */}
-        <BottomTabNavigator/>
+      <BottomTabNavigator />
     </Container>
   );
 };
