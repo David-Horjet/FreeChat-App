@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Alert } from "react-native";
 
 const CustomAlert = ({ message, type }) => {
+  console.log(type)
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {

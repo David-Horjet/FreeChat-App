@@ -4,7 +4,7 @@
     "slug": "FreeChat",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/fav.png",
     "userInterfaceStyle": "light",
     "plugins": [
       [
@@ -15,7 +15,7 @@
       ]
     ],
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/fav.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -27,12 +27,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/fav.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/fav.png"
     }
   }
 }

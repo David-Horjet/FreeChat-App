@@ -28,7 +28,8 @@ import CustomAlert from "../../../components/common/alerts/Alert";
 // import { ToastContainer, toast } from "react-native-toastify";
 // import "react-native-toastify/dist/ReactToastify.css";
 // import { Context } from "../context/Context";
-// import axios from "axios";
+import axios from "axios";
+import { registerRoute } from "../../../utils/apiRoutes";
 // import { registerRoute } from "../utils/APIRoutes";
 // import logo from "../assets/images/logo.png";
 // import RoundLoader from "../components/Loaders/RoundLoader";
@@ -41,8 +42,9 @@ const RegisterScreen = () => {
     password: "",
     confirmPassword: "",
   });
-  console.log(values);
+  // console.log(values);
   const [loading, setLoading] = useState(false);
+  // console.log(loading)
 
   const [alertMessage, setAlertMessage] = useState("");
   const [alertType, setAlertType] = useState("");
@@ -52,52 +54,58 @@ const RegisterScreen = () => {
     try {
       if (handleValidation()) {
         const { password, username, email } = values;
-        const { data } = await axios.post(registerRoute, {
+        console.log(registerRoute)
+        const res = await axios.post(registerRoute, {
           username,
           email,
           password,
         });
-        if (data.status === false) {
-          setAlertMessage(data.message);
-          setAlertType("error");
-          setLoading(false);
-        }
-        if (data.status === true) {
+        console.log(res);
+        if (res.data.status === false) {
+          setAlertMessage(res.data.message); // Use res.data.message instead of data.message
+          setAlertType("error"); // Set alert type to "error"
+        } else if (res.data.status === true) {
           setAlertMessage("Registration successful!");
           setAlertType("success");
-          setLoading(false);
-          navigation.navigate("SetImage");
+          navigation.navigate("LoginScreen");
         }
       }
     } catch (error) {
+      console.log("Error: ", error);
       setLoading(false);
       if (error?.response?.data?.message) {
         setAlertMessage(error?.response?.data?.message);
       } else if (error.message) {
-        setAlertMessage(error?.response?.data?.message);
+        setAlertMessage(error.message);
       } else {
         setAlertMessage("Internal server error occurred");
       }
       setAlertType("error");
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleValidation = () => {
     const { password, confirmPassword, username, email } = values;
-    if (password !== confirmPassword) {
-      setAlertMessage("Password and Confirm password should be the same");
-      setAlertType("error");
-      return false;
-    } else if (username.length < 4) {
+    if (username.length < 4) {
+      setLoading(false);
       setAlertMessage("Username should be greater than 4 characters");
       setAlertType("error");
       return false;
+    } else if (email === "") {
+      setLoading(false);
+      setAlertMessage("Email is required ");
+      setAlertType("error");
+      return false;
     } else if (password.length < 4) {
+      setLoading(false);
       setAlertMessage("Password should be equal or greater than 4");
       setAlertType("error");
       return false;
-    } else if (email === "") {
-      setAlertMessage("Email is required");
+    } else if (password !== confirmPassword) {
+      setLoading(false);
+      setAlertMessage("Password and Confirm password should be the same");
       setAlertType("error");
       return false;
     }
@@ -154,17 +162,16 @@ const RegisterScreen = () => {
             {!loading ? (
               <ButtonText>Sign up</ButtonText>
             ) : (
-              <ButtonText>Loading...</ButtonText>
+              <ButtonText>Loading..</ButtonText>
             )}
           </SubmitButton>
           <BottomText>
             Already have an account ?{" "}
-            <LinkText onPress={() => navigation.navigate("Login")}>
+            <LinkText onPress={() => navigation.navigate("LoginScreen")}>
               Login
             </LinkText>
           </BottomText>
         </ScrollView>
-        {/* <ToastContainer /> */}
       </FormContainer>
       <CustomAlert message={alertMessage} type={alertType} />
     </>

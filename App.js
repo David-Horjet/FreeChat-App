@@ -5,10 +5,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ThemeProvider } from "styled-components/native";
 import { theme } from "./theme";
 import RegisterScreen from "./screens/auth/register/RegisterScreen";
+import WelcomeScreen from "./screens/main/WelcomeScreen";
 import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
+import LoginScreen from "./screens/auth/login/LoginScreen";
+import ChatScreen from "./screens/auth/chat/ChatScreen";
+// import * as SplashScreen from "expo-splash-screen";
 
-SplashScreen.preventAutoHideAsync();
+// SplashScreen.preventAutoHideAsync();
 
 const Stack = createNativeStackNavigator();
 
@@ -27,13 +30,16 @@ const App = () => {
     return null;
   }
   return (
-    <ThemeProvider theme={theme} style={{ fontFamily: 'Noto-Sans' }}>
+    <ThemeProvider theme={theme} style={{ fontFamily: "Noto-Sans" }}>
       <NavigationContainer>
         <Stack.Navigator
-          // initialRouteName="SplashScreen"
+          initialRouteName="WelcomeScreen"
           screenOptions={{ headerShown: false }}
         >
+          <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+          <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen name="ChatScreen" component={ChatScreen} />
           {/* Add more screens here as needed */}
         </Stack.Navigator>
       </NavigationContainer>

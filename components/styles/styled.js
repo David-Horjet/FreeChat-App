@@ -9,6 +9,13 @@ export const FormContainer = styled.View`
   padding: 20px;
 `;
 
+export const Container = styled.View`
+  /* font-family:"NotoSans-VariableFont_wdth,wght"; */
+  flex: 1;
+  background-color: #fff;
+  padding: 20px;
+`;
+
 export const LogoContainer = styled.View`
   flex-direction: row;
   align-items: center;
@@ -23,7 +30,7 @@ export const LogoImage = styled.Image`
 
 export const HeadingText = styled.Text`
   padding-top: 70px;
-  color: #000;
+  color: #9442fe;
   font-weight: 500;
   font-size: 32px;
 `;
@@ -35,6 +42,7 @@ export const DescriptionContainer = styled.View`
 export const DescriptionText = styled.Text`
   color: #7f8c8d;
   text-align: center;
+  line-height: 20px;
 `;
 
 export const InputContainer = styled.View`
@@ -57,7 +65,7 @@ export const Input = styled.TextInput`
 `;
 
 export const SubmitButton = styled.TouchableOpacity`
-  background-color: #3498db;
+  background-color: #9442fe;
   padding: 12px;
   margin: 20px 0;
   border-radius: 5px;
@@ -79,4 +87,42 @@ export const BottomText = styled.Text`
 export const LinkText = styled.Text`
   color: #4e0eff;
   font-weight: bold;
+`;
+
+export const Header = styled.View`
+  padding: 30px 0;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const HeaderText = styled.Text`
+  font-size: 20px;
+  font-weight: bold;
+  color: #333333; /* Add your header text color */
+`;
+
+export const ContactItem = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+  padding: 15px;
+  border-bottom-width: 1px;
+  border-color: #dddddd; /* Add your border color */
+`;
+
+export const Avatar = styled.Image`
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin-right: 15px;
+`;
+
+export const ContactInfo = styled.View`
+  flex: 1;
+`;
+
+export const ContactName = styled.Text`
+  font-size: 16px;
+  font-weight: bold;
+  color: #333333; /* Add your contact name color */
 `;
