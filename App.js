@@ -8,7 +8,8 @@ import RegisterScreen from "./screens/auth/register/RegisterScreen";
 import WelcomeScreen from "./screens/main/WelcomeScreen";
 import { useFonts } from "expo-font";
 import LoginScreen from "./screens/auth/login/LoginScreen";
-import ChatScreen from "./screens/auth/chat/ChatScreen";
+import ChatScreen from "./screens/chat/ChatScreen";
+import BottomTabNavigator from "./components/shared/bottomTabNavigator/BottomTabNavigator";
 // import * as SplashScreen from "expo-splash-screen";
 
 // SplashScreen.preventAutoHideAsync();
@@ -20,11 +21,11 @@ const App = () => {
     "Noto-Sans": require("./assets/fonts/Noto_Sans/NotoSans-VariableFont_wdth,wght.ttf"),
   });
 
-  const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded || fontError) {
-      await SplashScreen.hideAsync();
-    }
-  }, [fontsLoaded, fontError]);
+  // const onLayoutRootView = useCallback(async () => {
+  //   if (fontsLoaded || fontError) {
+  //     await SplashScreen.hideAsync();
+  //   }
+  // }, [fontsLoaded, fontError]);
 
   if (!fontsLoaded && !fontError) {
     return null;
@@ -39,8 +40,7 @@ const App = () => {
           <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
-          <Stack.Screen name="ChatScreen" component={ChatScreen} />
-          {/* Add more screens here as needed */}
+          <Stack.Screen name="ChatScreen" component={BottomTabNavigator} />
         </Stack.Navigator>
       </NavigationContainer>
     </ThemeProvider>

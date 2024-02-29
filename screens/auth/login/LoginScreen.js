@@ -66,6 +66,7 @@ const LoginScreen = () => {
         }
         if (data.status === true) {
           await AsyncStorage.setItem("token", data.token);
+          await AsyncStorage.setItem("user", JSON.stringify(data.user));
           setAlertMessage("Login successful!");
           setAlertType("success");
           setLoading(false);

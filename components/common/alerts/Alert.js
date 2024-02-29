@@ -6,15 +6,15 @@ const CustomAlert = ({ message, type }) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (message) {
+    if (message && type) {
       setVisible(true);
       showAlert();
     }
-  }, [message]);
+  }, [message, type]);
 
   const showAlert = () => {
     Alert.alert(
-      type === "success" ? "Success" : "Error",
+      type,
       message,
       [{ text: "OK", onPress: () => setVisible(false) }],
       { cancelable: false }

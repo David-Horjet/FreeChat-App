@@ -3,14 +3,13 @@ import styled from "styled-components/native";
 import { theme } from "../../theme";
 
 export const FormContainer = styled.View`
-  /* font-family:"NotoSans-VariableFont_wdth,wght"; */
+  font-family:"Noto-Sans";
   flex: 1;
   background-color: #fff;
   padding: 20px;
 `;
 
 export const Container = styled.View`
-  /* font-family:"NotoSans-VariableFont_wdth,wght"; */
   flex: 1;
   background-color: #fff;
   padding: 20px;

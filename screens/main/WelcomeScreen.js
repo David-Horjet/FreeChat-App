@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { View, Text, Image, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import logo from "../../assets/logo.png"; 
+import logo from "../../assets/logo.png";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const WelcomeScreen = () => {
   const navigation = useNavigation();
 
   const handleGetStarted = () => {
-    navigation.navigate("RegisterScreen"); 
+    navigation.navigate("RegisterScreen");
   };
 
   useEffect(() => {
@@ -18,8 +18,10 @@ const WelcomeScreen = () => {
   const checkLoggedIn = async () => {
     try {
       const token = await AsyncStorage.getItem("token");
+      console.log(token);
       if (token) {
         navigation.navigate("ChatScreen");
+        console.log("done");
       }
     } catch (error) {
       console.error("Error checking login status:", error);
@@ -31,8 +33,7 @@ const WelcomeScreen = () => {
       <Image source={logo} style={styles.logo} />
       <Text style={styles.title}>FreeChat</Text>
       <Text style={styles.subtitle}>
-        Connect and chat with friends around the
-        world
+        Connect and chat with friends around the world
       </Text>
       <TouchableOpacity style={styles.button} onPress={handleGetStarted}>
         <Text style={styles.buttonText}>Get Started</Text>
@@ -57,19 +58,19 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: "bold",
-    color: "#fff", 
-    marginBottom: 10
+    color: "#fff",
+    marginBottom: 10,
   },
   subtitle: {
     fontSize: 16,
     paddingHorizontal: 10,
-    color: "#fff", 
+    color: "#fff",
     alignItems: "center",
     justifyContent: "center",
     marginBottom: 20,
   },
   button: {
-    backgroundColor: "#fff", 
+    backgroundColor: "#fff",
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 5,
