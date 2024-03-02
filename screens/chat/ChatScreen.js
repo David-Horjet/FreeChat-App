@@ -1,21 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  Image,
-  SafeAreaView,
-} from "react-native";
-import styled from "styled-components/native";
 import axios from "axios";
 import { io } from "socket.io-client";
 import { host, userRoute, usersRoute } from "../../utils/apiRoutes";
 import { Container, Header, HeaderText } from "../../components/styles/styled";
 import { AntDesign } from "@expo/vector-icons";
-import LoginScreen from "../auth/login/LoginScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import Contact from "../../components/chat/Contact";
+import { FlatList } from "react-native";
 
 const ChatScreen = () => {
   const socket = useRef();
@@ -24,10 +16,10 @@ const ChatScreen = () => {
   const [user, setUser] = useState({});
   const [userToken, setUserToken] = useState("");
   const [contacts, setContacts] = useState([]);
-  const [contactLoading, setContactLoading] = useState(false);
+  const [contactLoading, setContactLoading] = useState(true);
   const [currentChat, setCurrentChat] = useState(undefined);
 
-  // console.log("user", user);
+  console.log("contacts", contacts);
 
   useEffect(() => {
     AsyncStorage.getItem("user")
@@ -65,14 +57,13 @@ const ChatScreen = () => {
 
   const [profile, setProfile] = useState("");
   const [loading, setLoading] = useState(false);
-  console.log("userloading", loading);
-  console.log("contactLoading", contactLoading);
+  // console.log("userloading", loading);
 
   useEffect(() => {
     async function fetchUserData() {
       setLoading(true);
       try {
-        console.log("userToken", userToken);
+        // console.log("userToken", userToken);
         const res = await axios.get(`${userRoute}/${user?.username}`, {
           headers: {
             authorization: `Bearer ${userToken}`,
@@ -102,13 +93,17 @@ const ChatScreen = () => {
               authorization: `Bearer ${userToken}`,
             },
           });
-
+          if (res.data.status === false) {
+            // console.log("contact status false");
+            setContactLoading(false);
+          }
           if (res.data.status === true) {
-            setContacts(res.data);
+            setContacts(res.data.users);
+            setContactLoading(false);
           }
         }
       } catch (error) {
-        console.error("Error fetching all users:", error);
+        console.error("Error fetching contacts:", error);
       } finally {
         setContactLoading(false);
       }
@@ -141,11 +136,16 @@ const ChatScreen = () => {
           color="black"
         />
       </Header>
-      {/* <FlatList
-          data={contacts}
-          // renderItem={renderContact}
-        //   keyExtractor={(item) => item.id.toString()}
-        /> */}
+      <FlatList
+        data={contacts}
+        renderItem={({ item }) => (
+          <Contact
+            item={item}
+            currentChat={currentChat}
+            contactLoading={contactLoading}
+          />
+        )}
+      />
     </Container>
   );
 };
